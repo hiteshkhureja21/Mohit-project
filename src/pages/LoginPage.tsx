@@ -56,10 +56,10 @@ export const LoginPage: React.FC = () => {
             </h1>
           </div>
 
-          {/* Short Supporting Message (Staggered Fade-In) */}
-          <div className="animate-sf-sub mt-2 mb-8">
-            <p className="text-xs sm:text-sm text-stone-500 font-normal leading-relaxed">
-              Institutional document intelligence and grounded verification
+          {/* Tagline Supporting Message (Staggered Fade-In) */}
+          <div className="animate-sf-sub mt-2.5 mb-8">
+            <p className="text-xs sm:text-sm text-stone-500 font-normal leading-relaxed max-w-[340px] mx-auto">
+              Read smarter. Verify deeper. Act with confidence.
             </p>
           </div>
 
