@@ -39,26 +39,26 @@ export const LoginPage: React.FC = () => {
         <div className="w-full max-w-[390px] text-center">
           
           {/* 1. SOURCEFLOW LOGO — Pure Icon Mark Only (Subtle Pop-In Animation) */}
-          <div className="animate-sf-logo flex justify-center mb-4">
+          <div className="animate-sf-logo flex justify-center mb-4 sm:mb-5">
             <img
               src="/sourceflow_mark.png"
               alt="SourceFlow"
-              className="w-14 h-14 sm:w-20 sm:h-20 object-contain select-none"
+              className="w-14 h-14 sm:w-16 sm:h-16 object-contain select-none"
               loading="eager"
             />
           </div>
 
-          {/* 2. LARGE SOURCEFLOW HEADING (Staggered Slide-Up & Fade-In) */}
+          {/* 2. REFINED & ELEGANT SOURCEFLOW HEADING (Lighter Weight, Clean Letter Spacing) */}
           <div className="animate-sf-heading">
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight select-none">
+            <h1 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-tight select-none">
               <span className="text-[#0A2540]">Source</span>
               <span className="text-[#0E7F87]">Flow</span>
             </h1>
           </div>
 
-          {/* Tagline Supporting Message (Staggered Fade-In) */}
-          <div className="animate-sf-sub mt-2.5 mb-8">
-            <p className="text-xs sm:text-sm text-stone-500 font-normal leading-relaxed max-w-[340px] mx-auto">
+          {/* Tagline Supporting Message (Clean, Understated, Comfortable Spacing) */}
+          <div className="animate-sf-sub mt-2.5 sm:mt-3 mb-8 sm:mb-9">
+            <p className="text-xs sm:text-sm text-stone-500 font-normal tracking-normal leading-relaxed max-w-[340px] mx-auto">
               Read smarter. Verify deeper. Act with confidence.
             </p>
           </div>
