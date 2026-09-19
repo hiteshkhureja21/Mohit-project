@@ -427,7 +427,7 @@ export const Stage05Review: React.FC<Stage05ReviewProps> = ({ onBack, onContinue
 
           <button
             onClick={onContinue}
-            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold transition-all shadow-subtle hover:shadow-card cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#081D33] text-white text-xs font-semibold transition-all shadow-xs hover:shadow-subtle cursor-pointer"
           >
             <span>Proceed to Output Delivery</span>
             <ArrowRight className="w-3.5 h-3.5" />

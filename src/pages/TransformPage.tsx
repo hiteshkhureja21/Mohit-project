@@ -40,7 +40,7 @@ export const TransformPage: React.FC = () => {
           </div>
 
           {/* Minimal 6-Stage Progress Indicator */}
-          <div className="bg-white border border-stone-200/90 rounded-2xl p-3 shadow-subtle max-w-2xl mx-auto">
+          <div className="bg-white border border-stone-200/90 rounded-2xl p-2.5 sm:p-3 shadow-subtle max-w-2xl mx-auto">
             <div className="flex items-center justify-between">
               {stages.map((stage, idx) => {
                 const isDone = currentStage > stage.num;
@@ -54,18 +54,18 @@ export const TransformPage: React.FC = () => {
                       disabled={!isAccessible}
                       className={`flex items-center gap-1.5 text-xs font-medium transition-all ${
                         isCurrent
-                          ? 'text-teal-900 font-bold'
+                          ? 'text-[#0A2540] font-bold'
                           : isDone
-                          ? 'text-emerald-700 hover:text-emerald-900 cursor-pointer'
+                          ? 'text-[#0E7F87] hover:text-[#0A2540] cursor-pointer'
                           : 'text-stone-400 cursor-not-allowed'
                       }`}
                     >
                       <span
                         className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-mono font-bold transition-all ${
                           isCurrent
-                            ? 'bg-teal-700 text-white shadow-subtle'
+                            ? 'bg-[#0A2540] text-white shadow-xs'
                             : isDone
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-teal-50 text-[#0E7F87] border border-teal-200'
                             : 'bg-stone-100 text-stone-400'
                         }`}
                       >
@@ -78,7 +78,7 @@ export const TransformPage: React.FC = () => {
 
                     {idx < stages.length - 1 && (
                       <div className={`flex-1 h-0.5 mx-2 transition-all ${
-                        currentStage > stage.num ? 'bg-emerald-300' : 'bg-stone-200'
+                        currentStage > stage.num ? 'bg-[#0E7F87]/40' : 'bg-stone-200'
                       }`} />
                     )}
                   </React.Fragment>

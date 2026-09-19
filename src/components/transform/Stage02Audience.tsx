@@ -208,7 +208,7 @@ export const Stage02Audience: React.FC<Stage02AudienceProps> = ({ onBack, onCont
         <button
           onClick={onContinue}
           disabled={selectedProfiles.length === 0}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-medium transition-all shadow-subtle hover:shadow-card cursor-pointer disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#081D33] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs hover:shadow-subtle cursor-pointer disabled:opacity-50"
         >
           <span>Continue to Outputs</span>
           <ArrowRight className="w-4 h-4" />

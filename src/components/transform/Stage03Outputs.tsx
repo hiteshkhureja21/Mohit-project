@@ -195,9 +195,9 @@ export const Stage03Outputs: React.FC<Stage03OutputsProps> = ({ onBack, onGenera
           <button
             onClick={handleStartGeneration}
             disabled={selectedCount === 0 || isGenerating}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold transition-all shadow-subtle hover:shadow-card cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#081D33] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs hover:shadow-subtle cursor-pointer disabled:opacity-50"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-teal-300" />
             <span>Generate outputs</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>

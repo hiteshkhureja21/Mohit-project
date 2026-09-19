@@ -100,9 +100,9 @@ export const LibraryPage: React.FC = () => {
 
           <button
             onClick={() => navigate('#/transform')}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold transition-all shadow-subtle self-start sm:self-auto cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0A2540] hover:bg-[#081D33] text-white text-xs font-semibold transition-all shadow-xs self-start sm:self-auto cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-teal-300" />
             <span>New Transformation</span>
           </button>
         </div>
@@ -116,7 +116,7 @@ export const LibraryPage: React.FC = () => {
               placeholder="Search documents..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-white border border-stone-200 text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-teal-700 shadow-subtle"
+              className="w-full pl-9 pr-4 py-2 rounded-xl bg-white border border-stone-200 text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#0E7F87] shadow-subtle"
             />
           </div>
 
@@ -125,9 +125,9 @@ export const LibraryPage: React.FC = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-3 py-1.5 rounded-lg capitalize transition-colors font-medium ${
+                className={`px-3 py-1.5 rounded-lg capitalize transition-colors font-medium cursor-pointer ${
                   activeTab === tab
-                    ? 'bg-teal-700 text-white font-semibold'
+                    ? 'bg-[#0A2540] text-white font-semibold'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >

@@ -28,12 +28,12 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantClasses = {
-    primary: 'bg-primary text-on-primary hover:bg-primary-container shadow-sm',
-    secondary: 'bg-surface-container-low hover:bg-surface-container text-on-surface border border-outline-variant/60',
-    outline: 'border border-outline-variant hover:bg-surface-container-low text-on-surface',
-    destructive: 'bg-error-container text-on-error-container hover:bg-error hover:text-on-error',
-    chip: 'bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-md font-code-sm text-code-sm',
-    ghost: 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low',
+    primary: 'bg-[#0A2540] text-white hover:bg-[#081D33] shadow-xs',
+    secondary: 'bg-stone-50 hover:bg-stone-100 text-stone-800 border border-stone-200',
+    outline: 'border border-stone-200 hover:bg-stone-50 text-stone-700',
+    destructive: 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200',
+    chip: 'bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-md font-mono text-[11px]',
+    ghost: 'text-stone-600 hover:text-stone-900 hover:bg-stone-50',
   };
 
   return (

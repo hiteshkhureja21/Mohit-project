@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../store/AppContext';
 import { CreateDashboardModal } from '../components/workspace/CreateDashboardModal';
+import { SourceFlowLogo } from '../components/common/SourceFlowLogo';
 import {
   Layers,
   ArrowRight,
@@ -52,17 +53,11 @@ export const DashboardSelectorPage: React.FC = () => {
       <header className="bg-white border-b border-stone-200 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-teal-800 text-white flex items-center justify-center font-bold text-base shadow-sm">
-              <Layers className="w-5 h-5 text-teal-200" />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-stone-900 tracking-tight leading-none">
-                SourceFlow
-              </div>
-              <div className="text-[11px] text-stone-500 font-medium tracking-tight mt-0.5">
-                {currentWorkspace.name} &bull; Dashboard Hub
-              </div>
-            </div>
+            <SourceFlowLogo variant="mark" size="md" />
+            <span className="text-stone-300 font-light">/</span>
+            <span className="text-xs font-semibold text-stone-700 truncate max-w-[200px]">
+              {currentWorkspace.name} &bull; Dashboards
+            </span>
           </div>
 
           <div className="flex items-center gap-4">

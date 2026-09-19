@@ -8,12 +8,21 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#0F766E', // deep teal
-          dark: '#115E59',
-          darker: '#134E4A',
+          DEFAULT: '#0E7F87', // SourceFlow teal
+          teal: '#0E7F87',
+          navy: '#0A2540',
+          dark: '#0B2545',
+          darker: '#091E3A',
           light: '#F0FDFA',
           border: '#CCFBF1',
           accent: '#0D9488',
+        },
+        navy: {
+          DEFAULT: '#0A2540',
+          dark: '#081D33',
+          light: '#F0F4F8',
+          border: '#D9E2EC',
+          muted: '#334E68',
         },
         surface: {
           DEFAULT: '#FAFAF9', // warm off-white

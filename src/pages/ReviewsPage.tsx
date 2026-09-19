@@ -94,7 +94,7 @@ export const ReviewsPage: React.FC = () => {
               onClick={() => setActiveTab(tab.id as any)}
               className={`px-3.5 py-1.5 rounded-lg transition-colors font-medium cursor-pointer ${
                 activeTab === tab.id
-                  ? 'bg-teal-700 text-white font-semibold'
+                  ? 'bg-[#0A2540] text-white font-semibold'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >

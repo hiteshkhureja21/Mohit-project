@@ -228,7 +228,7 @@ export const Stage01Source: React.FC<Stage01SourceProps> = ({ onContinue }) => {
             <button
               onClick={handleAnalyzeAndProceed}
               disabled={isProcessing}
-              className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-medium text-sm transition-all shadow-subtle hover:shadow-card cursor-pointer disabled:opacity-60"
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-[#0A2540] hover:bg-[#081D33] text-white font-medium text-xs sm:text-sm transition-all shadow-xs hover:shadow-subtle cursor-pointer disabled:opacity-60"
             >
               {isProcessing ? (
                 <>
@@ -237,7 +237,7 @@ export const Stage01Source: React.FC<Stage01SourceProps> = ({ onContinue }) => {
                 </>
               ) : (
                 <>
-                  <span>Analyze source</span>
+                  <span>Analyze source & continue</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

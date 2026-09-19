@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../store/AppContext';
+import { SourceFlowLogo } from '../components/common/SourceFlowLogo';
 import {
-  FileText,
-  Brain,
-  Sparkles,
-  ShieldCheck,
-  Send,
-  ArrowRight,
-  Lock,
   Mail,
-  CheckCircle2,
-  Layers,
-  ArrowDown
+  Lock,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2
 } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
@@ -28,190 +23,174 @@ export const LoginPage: React.FC = () => {
     setIsLoading(false);
   };
 
-  const processSteps = [
-    { label: 'SOURCE', desc: 'Organizational reports & data', icon: FileText },
-    { label: 'UNDERSTAND', desc: 'Grounded intelligence extraction', icon: Brain },
-    { label: 'TRANSFORM', desc: 'Audience-tailored synthesis', icon: Sparkles },
-    { label: 'VERIFY', desc: 'Provable citation fact-checking', icon: ShieldCheck },
-    { label: 'DELIVER', desc: 'Attested stakeholder dispatch', icon: Send }
-  ];
+  const handleQuickDemo = async (roleEmail: string) => {
+    setEmail(roleEmail);
+    setIsLoading(true);
+    await login(roleEmail, 'password123', true);
+    setIsLoading(false);
+  };
 
   return (
-    <div className="min-h-screen w-screen bg-[#FAFAF9] flex flex-col justify-between select-none">
-      
-      {/* Main Container */}
-      <div className="flex-1 flex items-center justify-center p-6 sm:p-10 lg:p-16">
-        <div className="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+    <div className="min-h-screen w-screen bg-white flex flex-col justify-between font-sans selection:bg-teal-500 selection:text-white">
+      {/* Top Simple Header */}
+      <header className="w-full px-6 py-5 flex items-center justify-between">
+        <SourceFlowLogo variant="mark" size="md" />
+        <div className="flex items-center gap-4 text-xs">
+          <span className="text-stone-500 hidden sm:inline">Institutional Verification Instance</span>
+          <button
+            type="button"
+            onClick={() => handleQuickDemo('operator@sourceflow.demo')}
+            className="text-[#0E7F87] hover:text-[#0A2540] font-medium transition-colors"
+          >
+            Quick Demo Fill
+          </button>
+        </div>
+      </header>
+
+      {/* Main Centered Login Section (Inspired by Reference 2) */}
+      <main className="flex-1 flex items-center justify-center px-4 py-8">
+        <div className="w-full max-w-[420px] space-y-7">
           
-          {/* LEFT SIDE: SourceFlow Branding & Process Flow (Desktop) */}
-          <div className="lg:col-span-6 space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold">
-                <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
-                <span>Trusted Content Transformation Platform</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center font-bold text-base tracking-wider shadow-subtle">
-                  SF
-                </div>
-                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900 font-sans">
-                  SourceFlow
-                </h1>
-              </div>
-
-              <p className="text-xl text-teal-900 font-semibold tracking-tight font-sans">
-                "One source. Many trusted outputs."
-              </p>
-
-              <p className="text-sm text-stone-600 leading-relaxed max-w-md font-normal">
-                Transform complex information into clear, verified communication. Purpose-built for institutional and enterprise teams where accuracy and provenance matter.
-              </p>
-            </div>
-
-            {/* Minimal Visual Process Flowchart */}
-            <div className="pt-2 space-y-2 max-w-md">
-              <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider block mb-3 font-mono">
-                Transformation Pipeline
-              </span>
-
-              <div className="space-y-2">
-                {processSteps.map((step, idx) => {
-                  const Icon = step.icon;
-                  return (
-                    <React.Fragment key={step.label}>
-                      <div className="flex items-center gap-3.5 p-2.5 rounded-xl bg-white border border-stone-200/80 shadow-subtle">
-                        <div className="w-8 h-8 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center flex-shrink-0">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <div className="min-w-0 flex-1 flex items-center justify-between">
-                          <div>
-                            <span className="text-xs font-bold text-stone-900 font-mono tracking-wide block">
-                              {step.label}
-                            </span>
-                            <span className="text-[11px] text-stone-500 truncate block">
-                              {step.desc}
-                            </span>
-                          </div>
-                          <span className="text-[11px] font-mono text-stone-300">
-                            0{idx + 1}
-                          </span>
-                        </div>
-                      </div>
-
-                      {idx < processSteps.length - 1 && (
-                        <div className="flex justify-center -my-1">
-                          <div className="w-0.5 h-3 bg-stone-200" />
-                        </div>
-                      )}
-                    </React.Fragment>
-                  );
-                })}
-              </div>
-            </div>
+          {/* Header Title */}
+          <div className="text-center space-y-2">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 font-sans">
+              Sign in to SourceFlow
+            </h1>
           </div>
 
-          {/* RIGHT SIDE: Login Card */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end">
-            <div className="bg-white border border-stone-200 rounded-3xl p-8 sm:p-10 shadow-card w-full max-w-md space-y-6">
-              
-              <div className="space-y-1.5">
-                <h2 className="text-2xl font-bold text-stone-900 tracking-tight font-sans">
-                  Welcome back
-                </h2>
-                <p className="text-xs text-stone-500">
-                  Sign in to continue to your workspace.
-                </p>
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* Work Email */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-medium text-stone-700">
+                Work email <span className="text-rose-500">*</span>
+              </label>
+              <div className="relative">
+                <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="name@organization.com"
+                  required
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#0E7F87] focus:ring-1 focus:ring-[#0E7F87] transition-colors"
+                />
               </div>
+            </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-                
-                {/* Work Email Field */}
-                <div>
-                  <label className="block text-stone-700 font-medium mb-1.5 font-sans">
-                    Work email
-                  </label>
-                  <div className="relative">
-                    <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      placeholder="operator@sourceflow.demo"
-                      required
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-stone-50/50 text-stone-900 text-xs focus:bg-white focus:outline-none focus:border-teal-700 transition-colors shadow-subtle"
-                    />
-                  </div>
-                </div>
-
-                {/* Password Field */}
-                <div>
-                  <label className="block text-stone-700 font-medium mb-1.5 font-sans">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      placeholder="••••••••••••"
-                      required
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-stone-50/50 text-stone-900 text-xs focus:bg-white focus:outline-none focus:border-teal-700 transition-colors shadow-subtle"
-                    />
-                  </div>
-                </div>
-
-                {/* Options: Remember me & Forgot password */}
-                <div className="flex items-center justify-between pt-1">
-                  <label className="flex items-center gap-2 cursor-pointer text-stone-600">
-                    <input
-                      type="checkbox"
-                      checked={rememberMe}
-                      onChange={e => setRememberMe(e.target.checked)}
-                      className="w-4 h-4 rounded text-teal-700 border-stone-300 focus:ring-teal-700"
-                    />
-                    <span>Remember me</span>
-                  </label>
-
-                  <a href="#/login" className="text-teal-700 hover:text-teal-900 font-medium">
-                    Forgot password?
-                  </a>
-                </div>
-
-                {/* Primary CTA */}
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-sm transition-all shadow-subtle hover:shadow-card cursor-pointer disabled:opacity-60"
-                  >
-                    <span>{isLoading ? 'Signing in...' : 'Sign in'}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-
-              </form>
-
-              {/* Below Sign in link */}
-              <div className="pt-4 border-t border-stone-100 text-center text-xs text-stone-500">
-                <span>New to SourceFlow? </span>
-                <a href="#/login" className="text-teal-700 hover:text-teal-900 font-semibold underline underline-offset-2">
-                  Create an account
+            {/* Password */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-medium text-stone-700">
+                  Password <span className="text-rose-500">*</span>
+                </label>
+                <a
+                  href="#/login"
+                  className="text-[11px] text-[#0E7F87] hover:underline"
+                >
+                  Forgot password?
                 </a>
               </div>
-
+              <div className="relative">
+                <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="••••••••••••"
+                  required
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#0E7F87] focus:ring-1 focus:ring-[#0E7F87] transition-colors"
+                />
+              </div>
             </div>
+
+            {/* Remember me */}
+            <div className="flex items-center gap-2 pt-0.5">
+              <input
+                id="rememberMe"
+                type="checkbox"
+                checked={rememberMe}
+                onChange={e => setRememberMe(e.target.checked)}
+                className="w-4 h-4 rounded border-stone-300 text-[#0E7F87] focus:ring-[#0E7F87] accent-[#0E7F87]"
+              />
+              <label htmlFor="rememberMe" className="text-xs text-stone-600 cursor-pointer select-none">
+                Remember this device for 30 days
+              </label>
+            </div>
+
+            {/* Primary Action Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-2.5 px-4 rounded-xl bg-[#0A2540] hover:bg-[#081D33] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs hover:shadow-subtle cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
+            >
+              <span>{isLoading ? 'Verifying credentials...' : 'Sign in'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+
+          {/* Clean Divider */}
+          <div className="relative flex items-center justify-center">
+            <div className="border-t border-stone-200 w-full" />
+            <span className="bg-white px-3 text-xs text-stone-400 uppercase tracking-wider font-mono">
+              or
+            </span>
+          </div>
+
+          {/* Social / Institutional SSO (Blinq Reference Pattern) */}
+          <div className="space-y-2.5">
+            <button
+              type="button"
+              onClick={() => handleQuickDemo('operator@sourceflow.demo')}
+              className="w-full py-2.5 px-4 rounded-xl border border-stone-200 hover:bg-stone-50 text-stone-700 text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-2.5 cursor-pointer"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.27 21.39 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.97 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.61 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+              </svg>
+              <span>Continue with Google</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleQuickDemo('reviewer@sourceflow.demo')}
+              className="w-full py-2.5 px-4 rounded-xl border border-stone-200 hover:bg-stone-50 text-stone-700 text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-2.5 cursor-pointer"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 23 23">
+                <path fill="#f35325" d="M1 1h10v10H1z"/>
+                <path fill="#81bc06" d="M12 1h10v10H12z"/>
+                <path fill="#05a6f0" d="M1 12h10v10H1z"/>
+                <path fill="#ffba08" d="M12 12h10v10H12z"/>
+              </svg>
+              <span>Continue with Microsoft</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleQuickDemo('approver@sourceflow.demo')}
+              className="w-full py-2.5 px-4 rounded-xl border border-stone-200 hover:bg-stone-50 text-stone-700 text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-2.5 cursor-pointer"
+            >
+              <ShieldCheck className="w-4 h-4 text-[#0E7F87]" />
+              <span>Institutional Single Sign-On (SAML / Okta)</span>
+            </button>
+          </div>
+
+          {/* Security Assurance */}
+          <div className="pt-2 text-center text-[11px] text-stone-400 flex items-center justify-center gap-1.5 font-medium">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#0E7F87]" />
+            <span>End-to-end grounded verification & tamper-evident logs</span>
           </div>
 
         </div>
-      </div>
+      </main>
 
-      {/* Subtle Footer */}
-      <footer className="py-4 text-center text-xs text-stone-400 font-mono border-t border-stone-200/60 bg-white/60">
-        SourceFlow • Trusted Content Transformation Platform • Single Source of Truth
+      {/* Clean Footer */}
+      <footer className="w-full py-4 text-center text-xs text-stone-400 border-t border-stone-100 font-sans">
+        SourceFlow &bull; Single Source of Truth
       </footer>
-
     </div>
   );
 };
