@@ -1,5 +1,55 @@
-﻿node_modules/
+# ============================================================
+# SourceFlow — .gitignore
+# ============================================================
+
+# Dependencies
+node_modules/
+
+# Build output
 dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── Environment & Secret Files ────────────────────────────
+# Block ALL .env variants everywhere in the repo
 .env
-.env.local
+.env.*
+!.env.example
+!.env.*.example
+
+# Explicit nested paths (belt-and-suspenders)
+backend/.env
+backend/.env.*
+!backend/.env.example
+!backend/.env.*.example
+
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+!frontend/.env.*.example
+
+# ─── Private Key / Certificate Files ───────────────────────
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# ─── Vercel & CI ───────────────────────────────────────────
 .vercel/
+
+# ─── OS / Editor ───────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/settings.json
+
+# ─── Uploads (local dev) ───────────────────────────────────
+server/uploads/
+backend/uploads/

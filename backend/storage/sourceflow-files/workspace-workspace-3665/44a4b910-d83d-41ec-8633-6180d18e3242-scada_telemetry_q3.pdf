@@ -1,0 +1,11 @@
+NATIONAL CYBERSECURITY ADVISORY: SCADA TELEMETRY
+Document Reference: CERT-IN-2026-9812
+Status: CONFIRMED THREAT MITIGATION
+
+1. Perimeter Telemetry:
+During the observation window of September 1 to September 18, 2026, boundary gateways recorded 1,420,000 intrusion probes.
+Multi-factor authentication mechanisms and hardware security keys successfully repelled 100% of secondary privilege escalation attempts.
+
+2. Critical Vulnerability:
+A zero-day deserialization flaw was identified in legacy SCADA Ingress Gateway firmware (CVE-2026-2144).
+Mitigation: SCADA Isolation Gateway patch v4.2 must be deployed across all operational substations within 72 hours.

@@ -1,0 +1,26 @@
+{
+  "name": "sourceflow-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "node --env-file=.env test/step7_ai.test.js",
+    "test:step7": "node --env-file=.env test/step7_ai.test.js",
+    "test:step6": "node --env-file=.env test/step6_ocr.test.js",
+    "test:step5": "node --env-file=.env test/step5_validation.test.js",
+    "test:step4": "node --env-file=.env test/step4_storage.test.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.1",
+    "express": "^5.2.1",
+    "multer": "^2.4.0",
+    "openai": "^7.19.0",
+    "pdf-parse": "^2.4.5",
+    "zod": "^4.6.5"
+  }
+}
