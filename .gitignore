@@ -53,3 +53,5 @@ Thumbs.db
 # ─── Uploads (local dev) ───────────────────────────────────
 server/uploads/
 backend/uploads/
+backend/storage/sourceflow-files/
+backend/test/temp_oversized.txt
