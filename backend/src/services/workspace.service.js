@@ -84,9 +84,18 @@ export class WorkspaceService {
         }
       } catch (err) {
         if (!env.DEMO_MODE) {
-          console.error('[WorkspaceService] Database query failed, checking fallback:', err.message);
+          console.error('[WorkspaceService] Database query failed:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
         }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     // Fallback to in-memory workspaces for DEMO_MODE or when DB offline
@@ -130,8 +139,18 @@ export class WorkspaceService {
         }
       } catch (err) {
         markCircuitFailure();
-        // Fall through to in-memory store
+        if (!env.DEMO_MODE) {
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return inMemoryWorkspaces.find(w => w.id === workspaceId) || null;
@@ -186,9 +205,18 @@ export class WorkspaceService {
         }
       } catch (err) {
         if (!env.DEMO_MODE) {
-          console.warn('[WorkspaceService] Failed to insert to Supabase, writing to in-memory store:', err.message);
+          console.warn('[WorkspaceService] Failed to insert to Supabase:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
         }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     // In-memory fallback
@@ -237,8 +265,18 @@ export class WorkspaceService {
           };
         }
       } catch (err) {
-        // Fall through
+        if (!env.DEMO_MODE) {
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     const index = inMemoryWorkspaces.findIndex(w => w.id === workspaceId);
@@ -267,8 +305,18 @@ export class WorkspaceService {
 
         if (!error) return true;
       } catch (err) {
-        // Fall through
+        if (!env.DEMO_MODE) {
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     const index = inMemoryWorkspaces.findIndex(w => w.id === workspaceId);

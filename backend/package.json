@@ -11,7 +11,8 @@
     "test:step7": "node --env-file=.env test/step7_ai.test.js",
     "test:step6": "node --env-file=.env test/step6_ocr.test.js",
     "test:step5": "node --env-file=.env test/step5_validation.test.js",
-    "test:step4": "node --env-file=.env test/step4_storage.test.js"
+    "test:step4": "node --env-file=.env test/step4_storage.test.js",
+    "test:production": "node --env-file=.env test/step10_production.test.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",

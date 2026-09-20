@@ -358,8 +358,19 @@ export class ClaimsService {
           return data.map(c => this.formatForReviewUI(c));
         }
       } catch (err) {
-        console.warn('Database getClaims failed, using in-memory store:', err.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database getClaims failed:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     let filtered = [...inMemoryClaims];
@@ -394,8 +405,19 @@ export class ClaimsService {
           return this.formatForReviewUI(data);
         }
       } catch (err) {
-        console.warn('Database getClaimById failed:', err.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database getClaimById failed:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     let matched = null;
@@ -472,8 +494,19 @@ export class ClaimsService {
           })
           .eq('id', claimId);
       } catch (dbErr) {
-        console.warn('Database claim update notice:', dbErr.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database claim update notice:', dbErr.message);
+          const err = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          err.code = 'DATABASE_ERROR';
+          err.statusCode = 503;
+          throw err;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return this.formatForReviewUI(updatedRecord);
@@ -493,8 +526,19 @@ export class ClaimsService {
         const supabase = getSupabaseClient();
         await supabase.from('claims').delete().eq('id', claimId);
       } catch (dbErr) {
-        console.warn('Database claim delete notice:', dbErr.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database claim delete notice:', dbErr.message);
+          const err = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          err.code = 'DATABASE_ERROR';
+          err.statusCode = 503;
+          throw err;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return { deletedId: claimId };
@@ -559,8 +603,19 @@ export class ClaimsService {
           confidence: record.confidenceScore
         });
       } catch (dbErr) {
-        console.warn('Database insert claim notice:', dbErr.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database insert claim notice:', dbErr.message);
+          const err = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          err.code = 'DATABASE_ERROR';
+          err.statusCode = 503;
+          throw err;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return this.formatForReviewUI(record);

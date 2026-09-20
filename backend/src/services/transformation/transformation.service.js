@@ -154,8 +154,19 @@ export class TransformationService {
         if (error) throw error;
         return data;
       } catch (dbErr) {
-        console.warn('Database insert failed, falling back to local store:', dbErr.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database insert failed:', dbErr.message);
+          const err = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          err.code = 'DATABASE_ERROR';
+          err.statusCode = 503;
+          throw err;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return saveTransformation(record);
@@ -177,8 +188,19 @@ export class TransformationService {
 
         if (!error && data) return data;
       } catch (err) {
-        console.warn('Database fetch failed:', err.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database fetch failed:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     const t = getTransformationById(transformationId);
@@ -206,8 +228,19 @@ export class TransformationService {
 
         if (!error && data) return data;
       } catch (err) {
-        console.warn('Database list failed:', err.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database list failed:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return transformations.filter(t => !workspaceId || t.workspace_id === workspaceId);
@@ -604,8 +637,19 @@ export class TransformationService {
 
         if (!error && data) return data;
       } catch (err) {
-        console.warn('Database update failed, falling back to local store:', err.message);
+        if (!env.DEMO_MODE) {
+          console.warn('Database update failed:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return saveTransformation({ id, ...updates });

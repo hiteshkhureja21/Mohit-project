@@ -110,19 +110,30 @@ export function createApp() {
   // Health check endpoint (exempt from sensitive limits)
   app.get('/api/health', (req, res) => {
     const dbConfigured = isSupabaseConfigured();
+    const isProd = !env.DEMO_MODE;
+    
+    const dbStatus = dbConfigured ? 'supabase-postgresql' : (env.DEMO_MODE ? 'in-memory-demo' : 'not_configured');
+    const storageStatus = (dbConfigured && Boolean(env.SUPABASE_SERVICE_ROLE_KEY)) ? 'supabase-storage' : (env.DEMO_MODE ? 'local-disk-demo' : 'not_configured');
+    const aiStatus = Boolean(env.OPENAI_API_KEY) ? 'openai' : 'not_configured';
+    const ocrStatus = Boolean(env.OCR_API_KEY) ? 'ocr-space' : 'direct-extract';
+    const translationStatus = Boolean(env.LIBRETRANSLATE_URL) ? 'libretranslate' : (env.DEMO_MODE ? 'simulated' : 'not_configured');
+
+    const isHealthy = dbConfigured && Boolean(env.SUPABASE_SERVICE_ROLE_KEY);
+    const overallStatus = isHealthy ? 'healthy' : (isProd ? 'degraded' : 'healthy_demo');
+
     res.json({
       success: true,
-      status: 'healthy',
+      status: overallStatus,
       version: '1.0.0',
       environment: env.NODE_ENV,
       demoMode: env.DEMO_MODE,
       uptimeSeconds: Math.floor(process.uptime()),
       services: {
-        database: dbConfigured ? 'supabase-postgresql' : 'in-memory-fallback',
-        storage: (dbConfigured && Boolean(env.SUPABASE_SERVICE_ROLE_KEY)) ? 'supabase-storage' : 'local-disk',
-        ai: Boolean(env.OPENAI_API_KEY) ? 'openai' : 'simulated',
-        ocr: Boolean(env.OCR_API_KEY) ? 'ocr-space' : 'direct-extract',
-        translation: Boolean(env.LIBRETRANSLATE_URL) ? 'libretranslate' : 'fallback'
+        database: dbStatus,
+        storage: storageStatus,
+        ai: aiStatus,
+        ocr: ocrStatus,
+        translation: translationStatus
       },
       timestamp: new Date().toISOString()
     });

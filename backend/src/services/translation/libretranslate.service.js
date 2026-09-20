@@ -205,9 +205,7 @@ export class LibreTranslateService extends TranslationProvider {
         throw fetchErr;
       }
 
-      // If in DEMO_MODE or if local/remote LibreTranslate instance is not reachable,
-      // provide intelligent simulated translation so the system remains resilient
-      if (env.DEMO_MODE || fetchErr.code === 'ECONNREFUSED' || fetchErr.message?.includes('fetch failed')) {
+      if (env.DEMO_MODE) {
         const simulated = this.generateSimulatedTranslation(text, normSource, normTarget);
         return {
           translatedText: simulated,

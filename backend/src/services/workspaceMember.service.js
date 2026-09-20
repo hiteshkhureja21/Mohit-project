@@ -62,8 +62,18 @@ export class WorkspaceMemberService {
         }
       } catch (err) {
         markCircuitFailure();
-        // Fall through to in-memory memberships
+        if (!env.DEMO_MODE) {
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     // 2. Demo mode membership lookup (Single source of truth: demoMemberships)
@@ -104,6 +114,11 @@ export class WorkspaceMemberService {
 
       if (error) throw new Error(error.message);
       return data;
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     // Demo mode list
@@ -137,8 +152,19 @@ export class WorkspaceMemberService {
 
         if (!error && data) return data;
       } catch (err) {
-        console.warn('[WorkspaceMemberService] Supabase addMember error:', err.message);
+        if (!env.DEMO_MODE) {
+          console.warn('[WorkspaceMemberService] Supabase addMember error:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     const existingIdx = demoMemberships.findIndex(
@@ -181,8 +207,19 @@ export class WorkspaceMemberService {
 
         if (!error) return true;
       } catch (err) {
-        console.warn('[WorkspaceMemberService] Supabase removeMember error:', err.message);
+        if (!env.DEMO_MODE) {
+          console.warn('[WorkspaceMemberService] Supabase removeMember error:', err.message);
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     const idx = demoMemberships.findIndex(
@@ -210,8 +247,18 @@ export class WorkspaceMemberService {
           return data.map(d => d.workspace_id);
         }
       } catch (err) {
-        // Fall through to in-memory memberships
+        if (!env.DEMO_MODE) {
+          const dbErr = new Error('Database is unavailable. Cannot fall back to in-memory store in production.');
+          dbErr.code = 'DATABASE_ERROR';
+          dbErr.statusCode = 503;
+          throw dbErr;
+        }
       }
+    } else if (!env.DEMO_MODE) {
+      const err = new Error('Database is not configured. Cannot fall back to in-memory store in production.');
+      err.code = 'DATABASE_ERROR';
+      err.statusCode = 503;
+      throw err;
     }
 
     return demoMemberships
