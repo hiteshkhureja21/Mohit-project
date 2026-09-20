@@ -5,7 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+<<<<<<< HEAD
     "build": "node ./node_modules/typescript/bin/tsc && node ./node_modules/vite/bin/vite.js build",
+=======
+   "build": "node ./node_modules/typescript/bin/tsc && node ./node_modules/vite/bin/vite.js",
+>>>>>>> a3f3b46f248e222c761e0d2e98d817504d3653eb
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "preview": "vite preview"
   },
